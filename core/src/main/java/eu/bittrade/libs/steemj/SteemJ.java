@@ -618,7 +618,7 @@ public class SteemJ {
 	public int getAccountCount() throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
 		requestObject.setApiMethod(RequestMethods.GET_ACCOUNT_COUNT);
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		String[] parameters = {};
 		requestObject.setAdditionalParameters(parameters);
 
@@ -692,7 +692,7 @@ public class SteemJ {
 	public List<ExtendedAccount> getAccounts(List<AccountName> accountNames)
 			throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		requestObject.setApiMethod(RequestMethods.GET_ACCOUNTS);
 
 		// The API expects an array of arrays here.
@@ -795,7 +795,7 @@ public class SteemJ {
 	public ChainProperties getChainProperties() throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
 		requestObject.setApiMethod(RequestMethods.GET_CHAIN_PROPERTIES);
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		String[] parameters = {};
 		requestObject.setAdditionalParameters(parameters);
 
@@ -1070,7 +1070,7 @@ public class SteemJ {
 			throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
 		requestObject.setApiMethod(RequestMethods.GET_DYNAMIC_GLOBAL_PROPERTIES);
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		String[] parameters = {};
 		requestObject.setAdditionalParameters(parameters);
 

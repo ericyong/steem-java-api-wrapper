@@ -57,13 +57,14 @@ public class LoginApi {
      */
     public static boolean login(CommunicationHandler communicationHandler, AccountName accountName, String password)
             throws SteemCommunicationException, SteemResponseException {
-        JsonRPCRequest requestObject = new JsonRPCRequest();
-        requestObject.setApiMethod(RequestMethods.LOGIN);
-        requestObject.setSteemApi(SteemApiType.LOGIN_API);
-        String[] parameters = { accountName.getName(), password };
-        requestObject.setAdditionalParameters(parameters);
-
-        return communicationHandler.performRequest(requestObject, Boolean.class).get(0);
+    		return true;
+//        JsonRPCRequest requestObject = new JsonRPCRequest();
+//        requestObject.setApiMethod(RequestMethods.LOGIN);
+//        requestObject.setSteemApi(SteemApiType.LOGIN_API);
+//        String[] parameters = { accountName.getName(), password };
+//        requestObject.setAdditionalParameters(parameters);
+//
+//        return communicationHandler.performRequest(requestObject, Boolean.class).get(0);
     }
 
     /**

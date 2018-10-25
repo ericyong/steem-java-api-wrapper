@@ -28,6 +28,8 @@ public enum SteemApiType {
     DEBUG_NODE_API,
     /** The Steem "follow_api" */
     FOLLOW_API,
+    /** The Steem "condenser_api" */
+    CONDENSER_API,
     /** The Steem "market_history_api" */
     MARKET_HISTORY_API,
     /** The Steem "raw_block_api" */

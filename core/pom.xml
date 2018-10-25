@@ -13,15 +13,15 @@
 		<artifactId>steemj-parent</artifactId>
 		<version>0.5.0-SNAPSHOT</version>
 	</parent>
-
+<!-- 
 	<licenses>
 		<license>
 			<name>GNU General Public License, Version 3</name>
 			<url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
 		</license>
 	</licenses>
-
-	<developers>
+ -->
+	<!-- <developers>
 		<developer>
 			<name>dez1337</name>
 			<email>dez1337@bittrade.eu</email>
@@ -35,7 +35,7 @@
 		<developerConnection>scm:git:ssh://github.com/marvin-we/steem-java-api-wrapper.git</developerConnection>
 		<url>https://github.com/marvin-we/steem-java-api-wrapper/tree/master</url>
 	</scm>
-
+ -->
 	<dependencies>
 		<!-- WS Client -->
 		<dependency>
