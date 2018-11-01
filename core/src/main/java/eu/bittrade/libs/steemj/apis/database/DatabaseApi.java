@@ -322,7 +322,7 @@ public class DatabaseApi {
             throws SteemCommunicationException, SteemResponseException {
         JsonRPCRequest requestObject = new JsonRPCRequest();
         requestObject.setApiMethod(RequestMethods.GET_BLOCK);
-        requestObject.setSteemApi(SteemApiType.DATABASE_API);
+        requestObject.setSteemApi(SteemApiType.CONDENSER_API);
         String[] parameters = { String.valueOf(blockNumber) };
         requestObject.setAdditionalParameters(parameters);
 

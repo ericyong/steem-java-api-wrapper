@@ -618,7 +618,7 @@ public class SteemJ {
 	public int getAccountCount() throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
 		requestObject.setApiMethod(RequestMethods.GET_ACCOUNT_COUNT);
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		String[] parameters = {};
 		requestObject.setAdditionalParameters(parameters);
 
@@ -653,7 +653,7 @@ public class SteemJ {
 	public Map<Integer, AppliedOperation> getAccountHistory(AccountName accountName, int from, int limit)
 			throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		requestObject.setApiMethod(RequestMethods.GET_ACCOUNT_HISTORY);
 		String[] parameters = { accountName.getName(), String.valueOf(from), String.valueOf(limit) };
 		requestObject.setAdditionalParameters(parameters);
@@ -692,7 +692,7 @@ public class SteemJ {
 	public List<ExtendedAccount> getAccounts(List<AccountName> accountNames)
 			throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		requestObject.setApiMethod(RequestMethods.GET_ACCOUNTS);
 
 		// The API expects an array of arrays here.
@@ -795,7 +795,7 @@ public class SteemJ {
 	public ChainProperties getChainProperties() throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
 		requestObject.setApiMethod(RequestMethods.GET_CHAIN_PROPERTIES);
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		String[] parameters = {};
 		requestObject.setAdditionalParameters(parameters);
 
@@ -1070,7 +1070,7 @@ public class SteemJ {
 			throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
 		requestObject.setApiMethod(RequestMethods.GET_DYNAMIC_GLOBAL_PROPERTIES);
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 		String[] parameters = {};
 		requestObject.setAdditionalParameters(parameters);
 
@@ -1404,7 +1404,7 @@ public class SteemJ {
 			throws SteemCommunicationException, SteemResponseException {
 		JsonRPCRequest requestObject = new JsonRPCRequest();
 		requestObject.setApiMethod(RequestMethods.GET_TRANSACTION_HEX);
-		requestObject.setSteemApi(SteemApiType.DATABASE_API);
+		requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 
 		Object[] parameters = { signedTransaction };
 		requestObject.setAdditionalParameters(parameters);
@@ -4271,7 +4271,7 @@ public class SteemJ {
 	 *             If one of the provided parameters does not fulfill the
 	 *             requirements described above.
 	 */
-	public TransferOperation transfer(AccountName to, Asset amount, String memo)
+	public String transfer(AccountName to, Asset amount, String memo)
 			throws SteemCommunicationException, SteemResponseException, SteemInvalidTransactionException {
 		if (SteemJConfig.getInstance().getDefaultAccount().isEmpty()) {
 			throw new InvalidParameterException(NO_DEFAULT_ACCOUNT_ERROR_MESSAGE);
@@ -4325,7 +4325,7 @@ public class SteemJ {
 	 *             If one of the provided parameters does not fulfill the
 	 *             requirements described above.
 	 */
-	public TransferOperation transfer(AccountName from, AccountName to, Asset amount, String memo)
+	public String transfer(AccountName from, AccountName to, Asset amount, String memo)
 			throws SteemCommunicationException, SteemResponseException, SteemInvalidTransactionException {
 		TransferOperation transferOperation = new TransferOperation(from, to, amount, memo);
 		ArrayList<Operation> operations = new ArrayList<>();
@@ -4335,7 +4335,8 @@ public class SteemJ {
 				null);
 		signedTransaction.sign();
 		this.broadcastTransaction(signedTransaction);
-		return transferOperation;
+//		String txid=this.getTransactionHex(signedTransaction);
+		return this.getTransactionHex(signedTransaction);
 	}
 
 	/**

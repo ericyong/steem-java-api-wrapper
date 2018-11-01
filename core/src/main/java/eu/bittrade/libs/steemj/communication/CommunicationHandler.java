@@ -116,7 +116,7 @@ public class CommunicationHandler {
             JsonRPCResponse rawJsonResponse = client.invokeAndReadResponse(requestObject, endpoint.getLeft(),
                     endpoint.getRight());
             LOGGER.debug("Received {} ", rawJsonResponse);
-
+            System.out.println("rawJsonResponse="+rawJsonResponse);
             if (rawJsonResponse.isError()) {
                 throw rawJsonResponse.handleError(requestObject.getId());
             } else {

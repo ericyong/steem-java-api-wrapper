@@ -38,6 +38,7 @@ public class HttpClient extends AbstractClient {
             }
 
             String requestPayload = requestObject.toJson();
+            System.out.println("requestPayload="+requestPayload);
             HttpRequest httpRequest = builder.build().createRequestFactory(new HttpClientRequestInitializer())
                     .buildPostRequest(new GenericUrl(endpointUri),
                             ByteArrayContent.fromString("application/json", requestPayload));
