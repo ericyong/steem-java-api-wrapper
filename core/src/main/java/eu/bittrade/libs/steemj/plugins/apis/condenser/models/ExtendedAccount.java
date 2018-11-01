@@ -101,6 +101,8 @@ public class ExtendedAccount extends Account {
     /** Posts recommened for this user. */
     @JsonProperty("recommended")
     private List<String> recommended;
+    @JsonProperty("voting_manabar")
+    private List<Map<String,String>> votingManabar;
 
     /**
      * This object is only used to wrap the JSON response in a POJO, so

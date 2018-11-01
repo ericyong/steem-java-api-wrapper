@@ -16,6 +16,7 @@
  */
 package eu.bittrade.libs.steemj.plugins.apis.condenser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import eu.bittrade.libs.steemj.base.models.Permlink;
@@ -29,6 +30,7 @@ import eu.bittrade.libs.steemj.plugins.apis.condenser.models.ExtendedAccount;
 import eu.bittrade.libs.steemj.plugins.apis.condenser.models.ExtendedDynamicGlobalProperties;
 import eu.bittrade.libs.steemj.plugins.apis.condenser.models.State;
 import eu.bittrade.libs.steemj.plugins.apis.database.DatabaseApi;
+import eu.bittrade.libs.steemj.protocol.AccountName;
 
 /**
  * This class implements the "condenser_api".
@@ -65,8 +67,9 @@ public class CondenserApi {
      */
     public static ExtendedDynamicGlobalProperties getDynamicGlobalProperties(CommunicationHandler communicationHandler)
             throws SteemCommunicationException, SteemResponseException {
+    		String[] parameters = {};
         JsonRPCRequest requestObject = new JsonRPCRequest(SteemApiType.CONDENSER_API,
-                RequestMethod.GET_DYNAMIC_GLOBAL_PROPERTIES, null);
+                RequestMethod.GET_DYNAMIC_GLOBAL_PROPERTIES, parameters);
 
         return communicationHandler.performRequest(requestObject, ExtendedDynamicGlobalProperties.class).get(0);
     }
@@ -90,9 +93,17 @@ public class CondenserApi {
      *             <li>If the Server returned an error object.</li>
      *             </ul>
      */
-    public static List<ExtendedAccount> getAccounts(CommunicationHandler communicationHandler)
+    public static List<ExtendedAccount> getAccounts(CommunicationHandler communicationHandler,List<AccountName> accountNames)
             throws SteemCommunicationException, SteemResponseException {
-        JsonRPCRequest requestObject = new JsonRPCRequest(SteemApiType.CONDENSER_API, RequestMethod.GET_ACCOUNTS, null);
+    	// The API expects an array of arrays here.
+    			String[] innerParameters = new String[accountNames.size()];
+    			for (int i = 0; i < accountNames.size(); i++) {
+    				innerParameters[i] = accountNames.get(i).getName();
+    			}
+
+    			String[][] parameters = { innerParameters };
+
+        JsonRPCRequest requestObject = new JsonRPCRequest(SteemApiType.CONDENSER_API, RequestMethod.GET_ACCOUNTS, parameters) ;
 
         return communicationHandler.performRequest(requestObject, ExtendedAccount.class);
     }

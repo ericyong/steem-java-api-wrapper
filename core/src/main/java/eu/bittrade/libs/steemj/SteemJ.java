@@ -500,7 +500,7 @@ public class SteemJ {
      */
     public DynamicGlobalProperty getDynamicGlobalProperties()
             throws SteemCommunicationException, SteemResponseException {
-        return DatabaseApi.getDynamicGlobalProperties(communicationHandler);
+        return CondenserApi.getDynamicGlobalProperties(communicationHandler);
     }
 
     /**
@@ -548,23 +548,8 @@ public class SteemJ {
      */
     public List<ExtendedAccount> getAccounts(List<AccountName> accountNames)
             throws SteemCommunicationException, SteemResponseException {
-        /*
-         * JsonRPCRequest requestObject = new JsonRPCRequest();
-         * requestObject.setSteemApi(SteemApiType.DATABASE_API);
-         * requestObject.setApiMethod(RequestMethod.GET_ACCOUNTS);
-         * 
-         * // The API expects an array of arrays here. String[] innerParameters
-         * = new String[accountNames.size()]; for (int i = 0; i <
-         * accountNames.size(); i++) { innerParameters[i] =
-         * accountNames.get(i).getName(); }
-         * 
-         * String[][] parameters = { innerParameters };
-         * 
-         * requestObject.setAdditionalParameters(parameters); return
-         * communicationHandler.performRequest(requestObject,
-         * ExtendedAccount.class);
-         */
-        return null;
+        
+        return CondenserApi.getAccounts(communicationHandler,accountNames);
     }
 
     /**
@@ -1420,9 +1405,12 @@ public class SteemJ {
      *             <li>If the Server returned an error object.</li>
      *             </ul>
      */
-    public boolean verifyAuthority(SignedTransaction signedTransaction)
+    public boolean verifyAuthority(String account,String[] keys)
             throws SteemCommunicationException, SteemResponseException {
-        return DatabaseApi.verifyAccountAuthority(communicationHandler, null).isValid();
+    		List<Object> parameters = new ArrayList<>();
+    		parameters.add(account);
+    		parameters.add(keys);
+        return DatabaseApi.verifyAccountAuthority(communicationHandler, parameters).isValid();
     }
 
     // #########################################################################
@@ -2148,7 +2136,9 @@ public class SteemJ {
         ExtendedDynamicGlobalProperties extendedDynamicGlobalProperties = CondenserApi
                 .getDynamicGlobalProperties(communicationHandler);
         // TODO: Use getAccountBandwidth instead.
-        List<ExtendedAccount> extendedAccounts = CondenserApi.getAccounts(communicationHandler);
+        List<AccountName> accountNames=new ArrayList<>();
+        accountNames.add(accountName);
+        List<ExtendedAccount> extendedAccounts = CondenserApi.getAccounts(communicationHandler,accountNames);
 
         if (!extendedAccounts.contains(accountName)) {
             throw new InvalidParameterException("No account has been found matching the provided account name.");

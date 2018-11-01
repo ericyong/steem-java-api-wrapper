@@ -459,7 +459,7 @@ public class SteemJConfig {
      *            The address prefix to set.
      */
     public void setAddressPrefix(AddressPrefixType addressPrefix) {
-        this.addressPrefix = addressPrefix;
+		this.addressPrefix = addressPrefix;
     }
 
     /**

@@ -929,10 +929,10 @@ public class DatabaseApi {
      * @throws SteemResponseException
      */
     public static VerifyAccountAuthorityReturn verifyAccountAuthority(CommunicationHandler communicationHandler,
-            VerifyAccountAuthorityArgs verifyAccountAuthorityArgs)
+            Object params)
             throws SteemCommunicationException, SteemResponseException {
-        JsonRPCRequest requestObject = new JsonRPCRequest(SteemApiType.DATABASE_API,
-                RequestMethod.VERIFY_ACCOUNT_AUTHORITY, null);
+        JsonRPCRequest requestObject = new JsonRPCRequest(SteemApiType.CONDENSER_API,
+                RequestMethod.VERIFY_ACCOUNT_AUTHORITY, params);
 
         return communicationHandler.performRequest(requestObject, VerifyAccountAuthorityReturn.class).get(0);
     }

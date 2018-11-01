@@ -16,6 +16,11 @@
  */
 package eu.bittrade.libs.steemj.plugins.apis.network.broadcast.api;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import eu.bittrade.libs.steemj.chain.SignedTransaction;
 import eu.bittrade.libs.steemj.communication.CommunicationHandler;
 import eu.bittrade.libs.steemj.communication.jrpc.JsonRPCRequest;
@@ -75,9 +80,12 @@ public class NetworkBroadcastApi {
         if (transaction.getSignatures() == null || transaction.getSignatures().isEmpty()) {
             transaction.sign();
         }
-
-        JsonRPCRequest requestObject = new JsonRPCRequest(SteemApiType.NETWORK_BROADCAST_API,
-                RequestMethod.BROADCAST_TRANSACTION, transaction);
+//        Map<String,SignedTransaction> trx=new HashMap<>();
+//        trx.put("trx", transaction);
+        List<Object> trx=new ArrayList<>();
+        trx.add(transaction);
+        JsonRPCRequest requestObject = new JsonRPCRequest(SteemApiType.CONDENSER_API,
+                RequestMethod.BROADCAST_TRANSACTION, trx);
 
         communicationHandler.performRequest(requestObject, Object.class);
     }
