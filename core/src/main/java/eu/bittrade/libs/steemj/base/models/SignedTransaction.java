@@ -201,6 +201,7 @@ public class SignedTransaction extends Transaction implements ByteTransformable,
                         (AccountName) requiredAuthority.getKey(), requiredAuthority.getValue());
             } else if (requiredAuthority.getKey() instanceof Authority) {
                 // TODO: Support authorities.
+            		System.out.println("Support authorities.");
             } else {
                 LOGGER.warn("Unknown SigningObject type {}", requiredAuthority.getKey());
             }
