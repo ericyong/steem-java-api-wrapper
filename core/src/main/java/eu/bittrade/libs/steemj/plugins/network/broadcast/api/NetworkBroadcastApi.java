@@ -107,7 +107,7 @@ public class NetworkBroadcastApi {
             throws SteemCommunicationException, SteemResponseException, SteemInvalidTransactionException {
         JsonRPCRequest requestObject = new JsonRPCRequest();
         requestObject.setApiMethod(RequestMethods.BROADCAST_TRANSACTION_SYNCHRONOUS);
-        requestObject.setSteemApi(SteemApiType.NETWORK_BROADCAST_API);
+        requestObject.setSteemApi(SteemApiType.CONDENSER_API);
 
         if (transaction.getSignatures() == null || transaction.getSignatures().isEmpty()) {
             transaction.sign();

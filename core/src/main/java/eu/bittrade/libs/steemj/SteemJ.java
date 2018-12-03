@@ -4334,9 +4334,10 @@ public class SteemJ {
 		SignedTransaction signedTransaction = new SignedTransaction(globalProperties.getHeadBlockId(), operations,
 				null);
 		signedTransaction.sign();
-		this.broadcastTransaction(signedTransaction);
+//		this.broadcastTransaction(signedTransaction);
+		BroadcastTransactionSynchronousReturn synchronousReturn=this.broadcastTransactionSynchronous(signedTransaction);
 //		String txid=this.getTransactionHex(signedTransaction);
-		return this.getTransactionHex(signedTransaction);
+		return synchronousReturn.getId().toString();
 	}
 
 	/**
